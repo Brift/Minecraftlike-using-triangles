@@ -5,7 +5,7 @@ using System.Collections;
 [RequireComponent (typeof(MeshCollider))]
 [RequireComponent (typeof(MeshFilter))]
 
-public class RootWedge : Wedge 
+public class Triblock : Wedge 
 {
 
 	protected MeshRenderer meshRenderer;

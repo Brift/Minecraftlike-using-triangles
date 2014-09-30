@@ -5,8 +5,14 @@ using System.Collections;
 public class World : MonoBehaviour 
 {
 	public static World currentWorld;
+	public static float DEPTH = (Mathf.Sqrt(3)/2);
+	// All of these values must be a power of 2
+	public static int maxSize = 4096;
+	public static int maxHeight = 256;
+	public static int qBoundary = 1024;
+	public static int rBoundary = 1024;
+	public static int sBoundary = 1024;
 
-	public int chunkWidth = 20, chunkHeight = 20, seed = 0;
 
 	// Use this for initialization
 	void Awake () 
