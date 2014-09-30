@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 /// <summary>
-/// Wedges are a pentahedron comprised of equilateral triangles for top and bottom and three squares on the sides.
+/// Wedges are a pentahedron comprised of equilateral triangles for top and bottom and three squares on the sides.  The length
+/// of each side is equal. Using recursion this 
+/// structure is divided into 8 child structures that 
 /// </summary>
 public class Wedge: MonoBehaviour 
 {
@@ -33,21 +35,21 @@ public class Wedge: MonoBehaviour
 		if (size == 1)
 		{
 			//Wedge 0 is the center upper wedge, which will be opposite facing from the parent wedge
-			childWedges[0] = new Triblock(qmid, rmid, smid, ymid, ymax, !triDirection, true);
+			childWedges[0] = new Triblock(qmid, rmid, smid, ymid, ymax, !triDirection);
 			//Wedge 1 is the upper rs corner, or the wedge that is located in the corner where r and s meet
-			childWedges[1] = new Triblock(qmid, r, s, ymid, ymax, triDirection, true );
+			childWedges[1] = new Triblock(qmid, r, s, ymid, ymax, triDirection);
 			//Wedge 2 is the upper qs corner, or the wedge that is located in the corner where q and s meet
-			childWedges[2] = new Triblock(q, rmid, s, ymid, ymax, triDirection, true);
+			childWedges[2] = new Triblock(q, rmid, s, ymid, ymax, triDirection);
 			//Wedge 3 is the upper qr corner, or the wedge that is located in the corner where q and r meet
-			childWedges[3] = new Triblock(q, r, smid, ymid, ymax, triDirection, true);
+			childWedges[3] = new Triblock(q, r, smid, ymid, ymax, triDirection);
 			//Wedge 4 is the center lower wedge, which will be opposite facing from the parent wedge
-			childWedges[4] = new Triblock(qmid, rmid, smid, ymin, ymax, !triDirection, true);
+			childWedges[4] = new Triblock(qmid, rmid, smid, ymin, ymax, !triDirection);
 			//Wedge 5 is the lower rs corner, or the wedge that is located in the corner where r and s meet
-			childWedges[5] = new Triblock(qmid, r, s, ymin, ymid, triDirection, true);
+			childWedges[5] = new Triblock(qmid, r, s, ymin, ymid, triDirection);
 			//Wedge 6 is the lower qs corner, or the wedge that is located in the corner where q and s meet
-			childWedges[6] = new Triblock(q, rmid, s, ymin, ymid, triDirection, true);
+			childWedges[6] = new Triblock(q, rmid, s, ymin, ymid, triDirection);
 			//Wedge 7 is the upper qr corner, or the wedge that is located in the corner where q and r meet
-			childWedges[7] = new Triblock(q, r, smid, ymin, ymid, triDirection, true);
+			childWedges[7] = new Triblock(q, r, smid, ymin, ymid, triDirection);
 		}
 		else
 		{

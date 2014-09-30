@@ -29,7 +29,8 @@ public class Triblock : Wedge
 	
 	}
 	
-	public Triblock ( int qside, int rside, int sside, int ylower, int yupper, bool direction, bool triblock)
+	public Triblock (int qside, int rside, int sside, int ylower, int yupper, bool direction):
+	base(qside, rside, sside, ylower, yupper, direction)
 	{
 		q = qside;
 		r = rside;

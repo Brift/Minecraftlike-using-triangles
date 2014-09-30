@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 public class World : MonoBehaviour 
@@ -13,6 +14,8 @@ public class World : MonoBehaviour
 	public static int rBoundary = 1024;
 	public static int sBoundary = 1024;
 	public static int minHeight = 0;
+	public static int seed;
+	public List<Triblock> triblocks;
 	
 
 
