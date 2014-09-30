@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+/// <summary>
+/// Wedges are a pentahedron comprised of equilateral triangles for top and bottom and three squares on the sides.
+/// </summary>
 public class Wedge: MonoBehaviour 
 {
 	
@@ -12,6 +14,9 @@ public class Wedge: MonoBehaviour
 	public int ymin;
 	public int ymax;
 	public int size;
+	// triDirection dictates whether the wedge is an upper facing wedge, meaning that the s edge is along the x set of planes
+	// and the rest of the wedge is above in a positive Z direction or a negative
+	public bool triDirection;
 	
 	
 	// Use this for initialization
@@ -27,7 +32,22 @@ public class Wedge: MonoBehaviour
 		
 		if (size == 1)
 		{
-			childWedges[0] = new Triblock();
+			//Wedge 0 is the center upper wedge, which will be opposite facing from the parent wedge
+			childWedges[0] = new Triblock(qmid, rmid, smid, ymid, ymax, !triDirection, true);
+			//Wedge 1 is the upper rs corner, or the wedge that is located in the corner where r and s meet
+			childWedges[1] = new Triblock(qmid, r, s, ymid, ymax, triDirection, true );
+			//Wedge 2 is the upper qs corner, or the wedge that is located in the corner where q and s meet
+			childWedges[2] = new Triblock(q, rmid, s, ymid, ymax, triDirection, true);
+			//Wedge 3 is the upper qr corner, or the wedge that is located in the corner where q and r meet
+			childWedges[3] = new Triblock(q, r, smid, ymid, ymax, triDirection, true);
+			//Wedge 4 is the center lower wedge, which will be opposite facing from the parent wedge
+			childWedges[4] = new Triblock(qmid, rmid, smid, ymin, ymax, !triDirection, true);
+			//Wedge 5 is the lower rs corner, or the wedge that is located in the corner where r and s meet
+			childWedges[5] = new Triblock(qmid, r, s, ymin, ymid, triDirection, true);
+			//Wedge 6 is the lower qs corner, or the wedge that is located in the corner where q and s meet
+			childWedges[6] = new Triblock(q, rmid, s, ymin, ymid, triDirection, true);
+			//Wedge 7 is the upper qr corner, or the wedge that is located in the corner where q and r meet
+			childWedges[7] = new Triblock(q, r, smid, ymin, ymid, triDirection, true);
 		}
 		else
 		{
@@ -40,8 +60,8 @@ public class Wedge: MonoBehaviour
 					childWedges[1] = null;
 					childWedges[2] = null;
 					childWedges[3] = null;
-					childWedges[4] = new Wedge(qmid, rmid, smid, ymin, ymid);
-					childWedges[5] = new Wedge(qmid, r, s, ymin, ymid);
+					childWedges[4] = new Wedge(qmid, rmid, smid, ymin, ymid, !triDirection);
+					childWedges[5] = new Wedge(qmid, r, s, ymin, ymid, triDirection);
 					childWedges[6] = null;
 					childWedges[7] = null;
 				}
@@ -52,10 +72,10 @@ public class Wedge: MonoBehaviour
 					childWedges[1] = null;
 					childWedges[2] = null;
 					childWedges[3] = null;
-					childWedges[4] = new Wedge(qmid, rmid, smid, ymin, ymid);
+					childWedges[4] = new Wedge(qmid, rmid, smid, ymin, ymid, !triDirection);
 					childWedges[5] = null;
-					childWedges[6] = new Wedge(q, rmid, s, ymin, ymid);
-					childWedges[7] = new Wedge(q, r, smid, ymin, ymid);
+					childWedges[6] = new Wedge(q, rmid, s, ymin, ymid, triDirection);
+					childWedges[7] = new Wedge(q, r, smid, ymin, ymid, triDirection);
 				}
 				else
 				{
@@ -63,25 +83,30 @@ public class Wedge: MonoBehaviour
 					childWedges[1] = null;
 					childWedges[2] = null;
 					childWedges[3] = null;
-					childWedges[4] = new Wedge(qmid, rmid, smid, ymin, ymax);
-					childWedges[5] = new Wedge(qmid, r, s, ymin, ymid);
-					childWedges[6] = new Wedge(q, rmid, s, ymin, ymid);
-					childWedges[7] = new Wedge(q, r, smid, ymin, ymid);	
+					childWedges[4] = new Wedge(qmid, rmid, smid, ymin, ymax, !triDirection);
+					childWedges[5] = new Wedge(qmid, r, s, ymin, ymid, triDirection);
+					childWedges[6] = new Wedge(q, rmid, s, ymin, ymid, triDirection);
+					childWedges[7] = new Wedge(q, r, smid, ymin, ymid, triDirection);	
 				}
 			}
 			else
 			{
-				//Wedge 0 is the center upper wedge, which will be opposite facing
-				childWedges[0] = new Wedge(qmid, rmid, smid, ymid, ymax);
+				//Wedge 0 is the center upper wedge, which will be opposite facing from the parent wedge
+				childWedges[0] = new Wedge(qmid, rmid, smid, ymid, ymax, !triDirection);
 				//Wedge 1 is the upper rs corner, or the wedge that is located in the corner where r and s meet
-				childWedges[1] = new Wedge(qmid, r, s, ymid, ymax);
-				//
-				childWedges[2] = new Wedge(q, rmid, s, ymid, ymax);
-				childWedges[3] = new Wedge(q, r, smid, ymid, ymax);
-				childWedges[4] = new Wedge(qmid, rmid, smid, ymin, ymax);
-				childWedges[5] = new Wedge(qmid, r, s, ymin, ymid);
-				childWedges[6] = new Wedge(q, rmid, s, ymin, ymid);
-				childWedges[7] = new Wedge(q, r, smid, ymin, ymid);
+				childWedges[1] = new Wedge(qmid, r, s, ymid, ymax, triDirection);
+				//Wedge 2 is the upper qs corner, or the wedge that is located in the corner where q and s meet
+				childWedges[2] = new Wedge(q, rmid, s, ymid, ymax, triDirection);
+				//Wedge 3 is the upper qr corner, or the wedge that is located in the corner where q and r meet
+				childWedges[3] = new Wedge(q, r, smid, ymid, ymax, triDirection);
+				//Wedge 4 is the center lower wedge, which will be opposite facing from the parent wedge
+				childWedges[4] = new Wedge(qmid, rmid, smid, ymin, ymax, !triDirection);
+				//Wedge 5 is the lower rs corner, or the wedge that is located in the corner where r and s meet
+				childWedges[5] = new Wedge(qmid, r, s, ymin, ymid, triDirection);
+				//Wedge 6 is the lower qs corner, or the wedge that is located in the corner where q and s meet
+				childWedges[6] = new Wedge(q, rmid, s, ymin, ymid, triDirection);
+				//Wedge 7 is the upper qr corner, or the wedge that is located in the corner where q and r meet
+				childWedges[7] = new Wedge(q, r, smid, ymin, ymid, triDirection);
 			}
 		}
 	}
@@ -100,13 +125,14 @@ public class Wedge: MonoBehaviour
 		} 
 	}
 	
-	public Wedge(int qside,int rside, int sside, int ylower, int yupper)
+	public Wedge(int qside,int rside, int sside, int ylower, int yupper, bool direction)
 	{
 		q = qside;
 		r = rside;
 		s = sside;
 		ymin = ylower;
 		ymax = yupper;
+		triDirection = direction;
 		size = Mathf.Abs(q + r + s);
 	}
 }

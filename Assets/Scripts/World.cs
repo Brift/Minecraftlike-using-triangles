@@ -12,6 +12,8 @@ public class World : MonoBehaviour
 	public static int qBoundary = 1024;
 	public static int rBoundary = 1024;
 	public static int sBoundary = 1024;
+	public static int minHeight = 0;
+	
 
 
 	// Use this for initialization
