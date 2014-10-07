@@ -14,8 +14,9 @@ public class World : MonoBehaviour
 	public static int rBoundary = 1024;
 	public static int sBoundary = 1024;
 	public static int minHeight = 0;
-	public static int seed;
+	public static int seed = 0;
 	public List<Triblock> triblocks;
+	public Wedge rootWedge;
 	
 
 
@@ -27,11 +28,31 @@ public class World : MonoBehaviour
 		{
 			seed = Random.Range (0, int.MaxValue);
 		}
+		
+		//rootWedge = new Wedge(-2048, -1024, -1024, 0, 4096, true);
+	}
+	
+	void Start()
+	{
+		rootWedge = new Wedge(-2048, -1024, -1024, 0, 4096, true);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 	
+	}
+	
+	
+	
+	public Vector4 XYZtoQRSY(Vector3 input)
+	{
+		Vector4 qrsy = new Vector4();
+		qrsy.y = input.x +(1/2 * input.z);
+		qrsy.z = input.z / DEPTH;
+		qrsy.x = -(qrsy.y + qrsy.z);
+		qrsy.w = input.y;
+		
+		return qrsy;
 	}
 }

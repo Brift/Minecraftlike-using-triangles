@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 /// <summary>
 /// Wedges are a pentahedron comprised of equilateral triangles for top and bottom and three squares on the sides.  The length
-/// of each side is equal. Using recursion this 
-/// structure is divided into 8 child structures that 
+/// of each side is equal. Using recursion this structure is divided into 8 child structures that 
 /// </summary>
 public class Wedge: MonoBehaviour 
 {
@@ -24,6 +23,7 @@ public class Wedge: MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		childWedges = new Wedge[8];
 		int q2 = -(r + s);
 		int r2 = -(q + s);
 		int s2 = -(q + r);
@@ -129,6 +129,7 @@ public class Wedge: MonoBehaviour
 	
 	public Wedge(int qside,int rside, int sside, int ylower, int yupper, bool direction)
 	{
+		Debug.Log("A new wedge has been created");
 		q = qside;
 		r = rside;
 		s = sside;
